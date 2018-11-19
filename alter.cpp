@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 
 #include <iostream>
 #include <vector>
@@ -78,18 +78,3 @@ int main(int argc, char ** argv)
 			}
 		
 	
-=======
-#include <iostream>
-
-using namespace std;
-/*
-int main()
-{
-	int bitNumber;
-	cin >> bitNumber;
-
-	system("pause");
-	return 0;
-}
-*/
->>>>>>> ff888d555878966b5c17da0c770b8662d8ce063a
