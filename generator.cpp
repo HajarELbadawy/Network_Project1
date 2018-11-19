@@ -87,51 +87,52 @@ CRC_DIV CRC(vector<int>in, vector<int>gen)
 	stack<int> s;
 	x.input = in;
 	x.generator = gen;
-	for (int i = in.size() - 1; i >= 0; i--)
+	for (int i = in.size() - 1; i >=0 ; i--)
 	{
 		int element = in[i];
 		s.push(element);
 	}
-	//vector<int>output;
+	//vector<int>quotient;
 	//vector<int>reminder;//R
-	x.remainder.push_back(s.top());
+	x.reminder.push_back(s.top());
 	s.pop();
 	while (s.size() > 0) {
-		if (gen.size() - 1 <= x.remainder.size() - 1)
+		if (gen.size() - 1 <= x.reminder.size()-1)
 		{
-			if (gen[0] == x.remainder[0] == 1)
+			if (s.size() != 0 && x.reminder.size() == 0) { x.reminder.push_back(0); }
+			if (gen[0] == x.reminder[0] == 1)
 			{
 				x.quotient.push_back(1);
-				for (unsigned int i = 0; i <= gen.size() - 1; i++)
+				for (int i = 0; i <= gen.size() - 1; i++)
 				{
-					x.remainder[i] = gen[i] ^ x.remainder[i];
-
+					x.reminder[i] = gen[i] ^ x.reminder[i];
+					
 				}
-				x.remainder.push_back(s.top());
+				x.reminder.push_back(s.top());
 				s.pop();
-				while ((x.remainder.size() != 0 && s.size() != 0) && (x.remainder[0] == 0))
-				{
-					//						if(s.size()==0 && x.reminder.size() !=0 )
-					x.remainder.erase(x.remainder.begin());
-					//kol da 3ashan ashel al zero al 3ala al shemal 
-				}
-
+					while ((x.reminder.size() != 0 && s.size()!=0)&&(x.reminder[0] == 0))
+					{
+//						if(s.size()==0 && x.reminder.size() !=0 )
+							x.reminder.erase(x.reminder.begin());
+						//kol da 3ashan ashel al zero al 3ala al shemal 
+					}
+				
 			}
-
+		
 		}
 		else
 		{
-			x.remainder.push_back(s.top());
+			x.reminder.push_back(s.top());
 			s.pop();
 			x.quotient.push_back(0);
 		}
 	}
-	if (x.remainder.size() == 0)
+	if((s.size() == 0)&&(x.reminder.size()==0) )
 	{
-		x.quotient = { 0 };
+		x.quotient = {0};
 		return x;
 	}
-	else
+	else 
 	{
 		x.quotient.push_back(0);
 		return x;
