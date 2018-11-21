@@ -3,8 +3,8 @@
 using namespace std;
 class CRC_DIV {
 public:
-	vector<int>output;
-	vector<int>reminder;
+	vector<int>quotient;
+	vector<int>remainder;
 	vector<int>input;
 	vector<int>generator;
 	CRC_DIV();
@@ -12,6 +12,6 @@ public:
 	void set_input(vector<int>in);
 	void set_generator(vector<int>gene);
 
-	vector<int>get_output();
-	vector<int>get_reminder();
+	vector<int>get_quotient();
+	vector<int>get_remainder();
 };

@@ -17,11 +17,11 @@ void CRC_DIV::set_generator(vector<int>gene)
 {
 	generator = gene;
 }
-vector<int>CRC_DIV::get_output()
+vector<int>CRC_DIV::get_quotient()
 {
-	return output;
+	return quotient;
 }
-vector<int> CRC_DIV::get_reminder()
+vector<int> CRC_DIV::get_remainder()
 {
-	return reminder;
+	return remainder;
 }

@@ -7,7 +7,8 @@
 using namespace std;
 CRC_DIV CRC(vector<int>in, vector<int>gen);
 
-int main(int argc, char ** argv)
+//int main(int argc, char ** argv)
+int main()
 {
 	string S[3];//array of strings to store the lines in the input file
 	int YES = 0;//just a counter
@@ -16,9 +17,10 @@ int main(int argc, char ** argv)
 	vector<int>Data_Transmitted;
 	vector<int>Generator_Function;
 	//Read the input text file that is sent as an argument to this program.
-	if (argv[1] != NULL)
+	//if (argv[1] != NULL)
 	{
-		ifstream infile(argv[1]);
+		//ifstream infile(argv[1]);
+		ifstream infile("transmitted_message.txt");
 		if (!infile.bad())
 		{//store what in the input text file (2 lines) in 2 strings
 			while (getline(infile, S[YES]))
@@ -58,9 +60,9 @@ int main(int argc, char ** argv)
 					}
 				}
 				if (Zero_flag == true)
-					cout << "message is correct";
+					cout << "message is correct"<<endl;
 				else
-					cout << "message is not correct";
+					cout << "message is not correct"<<endl;
 
 			}
 		}
@@ -75,52 +77,52 @@ CRC_DIV CRC(vector<int>in, vector<int>gen)
 	stack<int> s;
 	x.input = in;
 	x.generator = gen;
-	for (int i = in.size() - 1; i >=0 ; i--)
+	for (int i = in.size() - 1; i >= 0; i--)
 	{
 		int element = in[i];
 		s.push(element);
 	}
-	//vector<int>quotient;
+	//vector<int>output;
 	//vector<int>reminder;//R
-	x.reminder.push_back(s.top());
+	x.remainder.push_back(s.top());
 	s.pop();
 	while (s.size() > 0) {
-		if (gen.size() - 1 <= x.reminder.size()-1)
+		if (gen.size() - 1 <= x.remainder.size() - 1)
 		{
-			if (s.size() != 0 && x.reminder.size() == 0) { x.reminder.push_back(0); }
-			if (gen[0] == x.reminder[0] == 1)
+			if (s.size() != 0 && x.remainder.size() == 0) { x.remainder.push_back(0); }
+			if (gen[0] == x.remainder[0] == 1)
 			{
 				x.quotient.push_back(1);
-				for (int i = 0; i <= gen.size() - 1; i++)
+				for (unsigned int i = 0; i <= gen.size() - 1; i++)
 				{
-					x.reminder[i] = gen[i] ^ x.reminder[i];
-					
+					x.remainder[i] = gen[i] ^ x.remainder[i];
+
 				}
-				x.reminder.push_back(s.top());
+				x.remainder.push_back(s.top());
 				s.pop();
-					while ((x.reminder.size() != 0 && s.size()!=0)&&(x.reminder[0] == 0))
-					{
-//						if(s.size()==0 && x.reminder.size() !=0 )
-							x.reminder.erase(x.reminder.begin());
-						//kol da 3ashan ashel al zero al 3ala al shemal 
-					}
-				
+				while ((x.remainder.size() != 0 && s.size() != 0) && (x.remainder[0] == 0))
+				{
+					//if(s.size()==0 && x.remainder.size() !=0 )
+					x.remainder.erase(x.remainder.begin());
+					//kol da 3ashan ashel al zero al 3ala al shemal 
+				}
+
 			}
-		
+
 		}
 		else
 		{
-			x.reminder.push_back(s.top());
+			x.remainder.push_back(s.top());
 			s.pop();
 			x.quotient.push_back(0);
 		}
 	}
-	if((s.size() == 0)&&(x.reminder.size()==0) )
+	if ((s.size() == 0) && (x.remainder.size() == 0))
 	{
-		x.quotient = {0};
+		x.quotient = { 0 };
 		return x;
 	}
-	else 
+	else
 	{
 		x.quotient.push_back(0);
 		return x;
